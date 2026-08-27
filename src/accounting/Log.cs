@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 
 using Microsoft.Extensions.Logging;
-using Oteldemo;
 
 namespace Accounting
 {
@@ -11,8 +10,8 @@ namespace Accounting
         [LoggerMessage(
             Level = LogLevel.Information,
             EventName = "accounting.order.received",
-            Message = "Order details: {@OrderResult}.")]
-        public static partial void OrderReceivedMessage(ILogger logger, OrderResult orderResult);
+            Message = "Order received: {orderId} with {itemCount} items.")]
+        public static partial void OrderReceivedMessage(ILogger logger, string orderId, int itemCount);
 
         [LoggerMessage(
             Level = LogLevel.Information,

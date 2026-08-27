@@ -85,7 +85,7 @@ internal class Consumer : BackgroundService
         try
         {
             var order = OrderResult.Parser.ParseFrom(message.Value);
-            Log.OrderReceivedMessage(_logger, order);
+            Log.OrderReceivedMessage(_logger, order.OrderId, order.Items.Count);
 
             if (_dbConnectionString == null)
             {
