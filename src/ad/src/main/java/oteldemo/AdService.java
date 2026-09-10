@@ -264,7 +264,8 @@ public final class AdService {
   private Collection<Ad> getAdsByCategory(@SpanAttribute("demo.ad.category") String category) {
     Collection<Ad> ads = adsMap.get(category);
     Span.current().setAttribute("demo.ad.count", ads.size());
-    adsServedCounter.labelValues(category).inc(ads.size());
+    String categoryLabel = adsMap.containsKey(category) ? category : "other";
+    adsServedCounter.labelValues(categoryLabel).inc(ads.size());
     return ads;
   }
 

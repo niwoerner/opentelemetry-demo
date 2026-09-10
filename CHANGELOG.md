@@ -7,6 +7,10 @@ the release.
 
 ## Unreleased
 
+* [ad] Bound the cardinality of the `demo_ad_served_total` Prometheus metric.
+  The `category` label was taken straight from the client supplied context
+  keys, so any request could mint a new series; unknown categories are now
+  reported as `other` while the raw value stays on the span
 * [react-native-app] Render missing `City` and `State` input fields in `CheckoutForm`
   ([#3754](https://github.com/open-telemetry/opentelemetry-demo/issues/3754))
 * [react-native-app] Fix `ProductCard` price calculation where `nanos` was
