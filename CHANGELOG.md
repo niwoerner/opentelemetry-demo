@@ -7,6 +7,10 @@ the release.
 
 ## Unreleased
 
+* [accounting] Stop logging the whole `OrderResult` for every consumed order.
+  The record included the customer's shipping address, so it was exported over
+  OTLP and stored in the log backend. Log the order id and item count instead;
+  the address is still persisted in the `shipping` table
 * [react-native-app] Render missing `City` and `State` input fields in `CheckoutForm`
   ([#3754](https://github.com/open-telemetry/opentelemetry-demo/issues/3754))
 * [react-native-app] Fix `ProductCard` price calculation where `nanos` was
