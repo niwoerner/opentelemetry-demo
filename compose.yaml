@@ -352,7 +352,7 @@ services:
       - IMAGE_PROVIDER_PORT
       - OTEL_COLLECTOR_PORT_GRPC
       - OTEL_COLLECTOR_PORT_HTTP
-      - OTEL_RESOURCE_ATTRIBUTES=${OTEL_RESOURCE_ATTRIBUTES},service.criticality=critical
+      - OTEL_RESOURCE_ATTRIBUTES=${OTEL_RESOURCE_ATTRIBUTES},service.criticality=critical,deployment.environment.name=demo
       - OTEL_SERVICE_NAME=frontend-proxy
       - OTEL_SERVICE_NAMESPACE
       - ENVOY_PORT
