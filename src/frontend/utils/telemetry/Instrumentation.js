@@ -15,8 +15,15 @@ const {containerDetector} = require('@opentelemetry/resource-detector-container'
 const {gcpDetector} = require('@opentelemetry/resource-detector-gcp');
 const {envDetector, hostDetector, osDetector, processDetector} = require('@opentelemetry/resources');
 
+// Matches request paths ending in common static asset file extensions
+const STATIC_ASSET_PATTERN = /\.(js|css|map|png|jpe?g|gif|svg|ico|webp|avif|woff2?|ttf|otf|eot)$/i;
+
 const sdk = new NodeSDK({
-  instrumentations: getNodeAutoInstrumentations(),
+  instrumentations: getNodeAutoInstrumentations({
+    '@opentelemetry/instrumentation-http': {
+      ignoreIncomingRequestHook: request => STATIC_ASSET_PATTERN.test((request.url || '').split('?')[0]),
+    },
+  }),
   spanProcessors: [
     new BatchSpanProcessor({ exporter: new OTLPTraceExporter() })
   ],
