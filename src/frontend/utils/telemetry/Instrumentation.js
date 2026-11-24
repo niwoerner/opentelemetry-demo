@@ -16,7 +16,11 @@ const {gcpDetector} = require('@opentelemetry/resource-detector-gcp');
 const {envDetector, hostDetector, osDetector, processDetector} = require('@opentelemetry/resources');
 
 const sdk = new NodeSDK({
-  instrumentations: getNodeAutoInstrumentations(),
+  instrumentations: getNodeAutoInstrumentations({
+    '@opentelemetry/instrumentation-http': {
+      ignoreIncomingRequestHook: request => (request.url || '').startsWith('/_next/static/'),
+    },
+  }),
   spanProcessors: [
     new BatchSpanProcessor({ exporter: new OTLPTraceExporter() })
   ],
